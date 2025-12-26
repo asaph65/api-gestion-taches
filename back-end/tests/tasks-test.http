@@ -1,0 +1,69 @@
+### Test de l'API de tâches
+
+### 1. Créer une tâche (nécessite un token)
+POST http://localhost:3000/api/tasks
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "title": "Faire les courses",
+  "description": "Acheter du lait, des œufs et du pain",
+  "priority": "high",
+  "dueDate": "2024-12-31",
+  "tags": ["shopping", "urgent"],
+  "isImportant": true,
+  "estimatedDuration": 60
+}
+
+### 2. Récupérer toutes les tâches (avec pagination)
+GET http://localhost:3000/api/tasks?page=1&limit=10&priority=high&sortBy=dueDate&sortOrder=asc
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 3. Récupérer les statistiques
+GET http://localhost:3000/api/tasks/stats
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 4. Récupérer une tâche spécifique
+GET http://localhost:3000/api/tasks/{{taskId}}
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 5. Mettre à jour une tâche
+PUT http://localhost:3000/api/tasks/{{taskId}}
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "title": "Faire les courses (mise à jour)",
+  "description": "Acheter du lait, des œufs, du pain et du fromage",
+  "priority": "medium",
+  "status": "in_progress"
+}
+
+### 6. Ajouter un tag
+PATCH http://localhost:3000/api/tasks/{{taskId}}/tags
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "tag": "home"
+}
+
+### 7. Marquer comme terminée
+PATCH http://localhost:3000/api/tasks/{{taskId}}/complete
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 8. Archiver une tâche
+PATCH http://localhost:3000/api/tasks/{{taskId}}/archive
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 9. Restaurer une tâche archivée
+PATCH http://localhost:3000/api/tasks/{{taskId}}/restore
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 10. Supprimer un tag
+DELETE http://localhost:3000/api/tasks/{{taskId}}/tags/shopping
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 11. Supprimer une tâche
+DELETE http://localhost:3000/api/tasks/{{taskId}}
+Authorization: Bearer YOUR_TOKEN_HERE
